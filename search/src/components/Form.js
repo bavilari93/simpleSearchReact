@@ -5,13 +5,12 @@ class Form extends Component{
 		return(
 
 			<div> 
-				<form onSubmit={this.props.sumit}> 
+				<form onSubmit={(e)=>{this.props.sumit(e)}}> 
 					<input 
 					placeholder="this is it"
 					value={this.props.value}
 					onChange={(e)=>{this.props.change(e)}}/>
-					<button
-					onClick={this.props.fetchApi}> works</button>
+					<button> works</button>
 				</form >
 			</div>
 
