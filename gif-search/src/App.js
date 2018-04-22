@@ -24,6 +24,8 @@ this.getGif();
 
 }
 
+
+
 getGif(e){
   let param= this.state.input
 fetch(`http://api.giphy.com/v1/gifs/search?q=${param}&api_key=H29ylmg5zMme5R3blnv5KhrJzg4Zk6xb`, {
@@ -39,8 +41,6 @@ response.json()
 
 oneGif(e){
   let index = e.index
-
-console.log(typeof index);
   let test = this.state.gifs[index]
 
   this.setState({
@@ -48,20 +48,28 @@ console.log(typeof index);
   })
 }
 
-
+removeLiked(e){
+this.setState(prev =>{
+  let newData = prev.selectedGif.slice()
+  newData.splice(e,1)
+  return{selectedGif:newData}
+})
+}
 
 
   render() {
     return (
       <div className="wrap">
-      <Liked likeDisplay={this.state.selectedGif}/>
+      <Liked 
+      likeDisplay={this.state.selectedGif}
+      removeLiked = {this.removeLiked.bind(this)}
+      />
         <SearchBar 
           onInputChange={this.onInputChange.bind(this)}
           value ={this.state.input}/>
         <GiftList 
           gifList={this.state.gifs}
-          display ={this.oneGif.bind(this)}/>
-          
+          display ={this.oneGif.bind(this)}/>    
       </div>
     );
   }
